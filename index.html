@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres ser mi San Valentín?</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #ffe4e1;
+            overflow: hidden;
+        }
+        #background {
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* z-index: -1; */
+            object-fit: contain;
+            position: absolute;
+        }
+        .centered {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        h1 {
+            font-size: 3em;
+            color: #ff1493;
+            text-shadow: 2px 2px 4px #fff;
+            font-weight: bold;
+        }
+        .btn-custom {
+            font-size: 1.5em;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 25px;
+        }
+        #noBtn {
+            position: absolute;
+        }
+        .btn-container {
+            position: relative;
+            width: 90vw;
+            height: 50vh;
+            margin: 0 auto;
+            border: 2px dashed transparent; /* Invisible boundary */
+            overflow: hidden;
+        }
+        .heart {
+            position: fixed;
+            bottom: -50px;
+            font-size: 2em;
+            color: red;
+            animation: floatUp 4s linear infinite;
+        }
+        
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh);
+                opacity: 0;
+            }
+        }
+        .footer-text {
+            position: fixed;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            font-size: 1em;
+            color: #8b0000;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <img src="https://i.pinimg.com/originals/2d/c8/8f/2dc88ffcbdce75ecb53272379d1a7839.gif" id="background">
+
+    <div class="centered" id="mainContent">
+        <h1>¿Quieres ser mi San Valentín?</h1>
+        <button class="btn btn-success btn-custom" id="yesBtn">Sí</button>
+        <div class="btn-container">
+            <button class="btn btn-danger btn-custom" id="noBtn">No</button>
+        </div>
+    </div>
+
+    <div class="centered" id="loveMessage" style="display: none;">
+        <h1>¡TE QUIERO MUCHO!</h1>
+        <!-- <img src="https://i.pinimg.com/originals/c0/68/60/c06860b058d7aadaa28874be0a723947.gif" alt="Te quiero mucho"> -->
+
+    </div>
+    <div class="footer-text">No sabía que esto se tenía que pedir, lo vi en un TikTok xD.</div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const mainContent = document.getElementById('mainContent');
+        const loveMessage = document.getElementById('loveMessage');
+        const background = document.getElementById('background');
+        const btnContainer = document.querySelector('.btn-container');
+
+        function moveNoBtn() {
+            const containerRect = btnContainer.getBoundingClientRect();
+            const maxX = containerRect.width - noBtn.offsetWidth;
+            const maxY = containerRect.height - noBtn.offsetHeight;
+
+            const x = Math.random() * maxX;
+            const y = Math.random() * maxY;
+
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.textContent = '❤️';
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 4000);
+        }
+
+        noBtn.addEventListener('mouseover', moveNoBtn);
+
+        yesBtn.addEventListener('click', () => {
+            mainContent.style.display = 'none';
+            loveMessage.style.display = 'block';
+            background.src = "https://i.pinimg.com/originals/0f/c8/b7/0fc8b7960ee5ac5ed89f21534ff0c23b.gif";
+
+            setInterval(createHeart, 200);
+        });
+        setInterval(() => {
+    background.src = background.src.split("?")[0] + "?" + new Date().getTime();
+}, 1000);
+
+    </script>
+</body>
+</html>
