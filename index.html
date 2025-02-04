@@ -97,7 +97,7 @@
         <!-- <img src="https://i.pinimg.com/originals/c0/68/60/c06860b058d7aadaa28874be0a723947.gif" alt="Te quiero mucho"> -->
 
     </div>
-    <div class="footer-text">No sabía que esto se tenía que pedir, lo vi en un TikTok xD.</div>
+    <div class="footer-text" id="footerText">No sabía que esto se tenía que pedir, lo vi en un TikTok xD.</div>
 
     <script>
         const noBtn = document.getElementById('noBtn');
@@ -137,6 +137,7 @@
             mainContent.style.display = 'none';
             loveMessage.style.display = 'block';
             background.src = "https://i.pinimg.com/originals/0f/c8/b7/0fc8b7960ee5ac5ed89f21534ff0c23b.gif";
+            footerText.textContent = "Te veo el 14 😈, mai lob";
 
             setInterval(createHeart, 200);
         });
